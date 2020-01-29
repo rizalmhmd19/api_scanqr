@@ -36,6 +36,8 @@ class Auth extends CI_Controller {
         $config['white']        = array(70,130,180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
 
+		//Ubah 192.168.3.73 menjadi IP Anda
+		//Ubah Api menjadi nama project
         $params['data'] = "http://192.168.3.73/Api/sign";
         // $params['data'] = "http://192.168.100.6/Api/sign";
         $params['level'] = 'H';
