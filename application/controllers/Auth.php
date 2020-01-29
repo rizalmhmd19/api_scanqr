@@ -36,7 +36,7 @@ class Auth extends CI_Controller {
         $config['white']        = array(70,130,180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
 
-        $params['data'] = "http://192.168.2.72/Api/sign";
+        $params['data'] = "http://192.168.3.73/Api/sign";
         // $params['data'] = "http://192.168.100.6/Api/sign";
         $params['level'] = 'H';
         $params['size'] = 12;
@@ -52,7 +52,6 @@ class Auth extends CI_Controller {
     		$otp = rand(11111,99999);
     		$getotp = $this->db->where('imei',$imei)->update('tb_user',['otp' => $otp]);
     		$user = $this->db->select('username,level,imei,otp,is_login')->where('imei',$imei)->get('tb_user')->row_array();
-
 
     		if ($user) {
     			$res = [
@@ -88,8 +87,12 @@ class Auth extends CI_Controller {
 
     public function active()
     {
-    	header('Access-Control-Allow-Origin: *');
-    	$otp = $this->input->post('otp');
+		header('Access-Control-Allow-Origin: *');
+		$this->form_validation->set_rules('otp', 'OTP', 'trim|required|min_length[5]');
+
+		
+		if ($this->form_validation->run() == TRUE) {
+			$otp = $this->input->post('otp');
 		// $imei = $this->session->userdata('imei');
     	$active = $this->db->select('*')->where('otp',$otp)->get('tb_user')->row_array();
 
@@ -127,9 +130,11 @@ class Auth extends CI_Controller {
     			'message' => 'Failed'
     		];
     	}
-
-
     	echo json_encode($res);
+		} else {
+			$res = ['message' => 'Failed'];
+			 echo json_encode($res);
+		}
 
     }
 

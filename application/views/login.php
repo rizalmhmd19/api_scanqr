@@ -50,6 +50,7 @@
 						<label for="otp" class="text-center col-sm-12">Verification</label>
 						<input type="password" name="otp" maxlength="5" id="otp" class="form-control text-center" placeholder="Code Verification">
 						<button type="submit" class="text-center btn btn-primary mt-2" style="width: 100%">OK</button>
+						<?php echo validation_errors(); ?>
 					</form>
 				</div>
 			</div>
@@ -105,11 +106,14 @@
 	    
 	    $.post( post_url, form_data, function(response) {
 	    	var res = JSON.parse(response);
-	      // console.log(res);
-	      if(res.data[0].is_login == 1){
-	      	window.location.href = '<?=site_url('dashboard');?>';
+	    //   console.log(res.data[0].is_login);
+	      if(res.message == "Failed"){
+			alert("Verification Code is Wrong!");
+	      	window.location.href = '<?=base_url();?>';
+			//   console.log("Gagal");
 	      }else{
-	      	console.log(response);
+	      	window.location.href = '<?=site_url('dashboard');?>';
+			//   console.log("Masuk");
 	      }
 	  });
 	});
