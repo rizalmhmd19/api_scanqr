@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
-	var $tes;
+	
 
 	public function __construct()
 	{
@@ -167,7 +167,31 @@ class Auth extends CI_Controller {
         echo json_encode(['message' => 'Success']);
     }
 
+	public function register()
+	{
+		$username = $this->input->post('username');
+		$pass = $this->input->post('pass');
+		$email = $this->input->post('email');
+		$imei = $this->input->post('imei');
 
+		$set = [
+			'username' => $username,
+			'password' => password_hash($pass,PASSWORD_BCRYPT),
+			'email' => $email,
+			'imei' => $imei,
+			'level' => 'admin'
+		];
+
+		$insert = $this->db->insert('tb_user',$set);
+
+		if ($insert) {
+			redirect(base_url(),'refresh');
+		}else{
+			echo '<script language="javascript">';
+			echo 'alert("Registration Failed")';
+			echo '</script>';
+		}
+	}
 
 }
 

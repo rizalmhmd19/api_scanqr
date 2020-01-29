@@ -40,7 +40,6 @@
 				<div class="text-center">
 					<h2>Login</h2>
 					<label>Scan Here!</label>
-					<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Open modal</button> -->
 				</div>
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="<?php echo base_url().'assets/images/'.$qr_code;?>" alt="QR-Code">
@@ -52,27 +51,40 @@
 						<button type="submit" class="text-center btn btn-primary mt-2" style="width: 100%">OK</button>
 						<?php echo validation_errors(); ?>
 					</form>
+					<button type="button" class="btn btn-sm" data-toggle="modal" data-target="#exampleModal">Register</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- Modal OTP -->
-	<!-- <div class="modal fade text-center" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" id="exampleModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false"aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-sm" role="document">
 	    <div class="modal-content">
 	      <div class="modal-body">
-	        <form method="POST" id="myForm" action="<?=base_url('auth/active');?>">
+	        <form method="POST" id="register" action="<?=base_url('auth/register');?>">
 	          <div class="form-group">
-	            <label for="code" class="text-center col-form-label">Verification Code</label>
-	            <input type="password" maxlength="5" name="pin" placeholder="Code" class="text-center form-control" id="code" autofocus>
+	            <label for="username" class="text-center col-form-label">Username</label>
+	            <input type="text" name="username" placeholder="Username" class="text-center form-control" id="username" autofocus>
+	          </div>
+	          <div class="form-group">
+	            <label for="email" class="text-center col-form-label">Email</label>
+	            <input type="text" name="email" placeholder="Email" class="text-center form-control" id="email" autofocus>
+	          </div>
+	          <div class="form-group">
+	            <label for="pass" class="text-center col-form-label">Password</label>
+	            <input type="password" name="pass" placeholder="Password" class="text-center form-control" id="pass" autofocus>
+	          </div>
+	          <div class="form-group">
+	            <label for="imei" class="text-center col-form-label">IMEI</label>
+	            <input type="text" name="imei" placeholder="Password" class="text-center form-control" id="imei" autofocus>
 	          </div>
 	          <button type="submit" class="text-center btn btn-primary" style="width: 100%">OK</button>
-	      </div>
 	        </form>
+	      </div>
 	    </div>
 	  </div>
-	</div> -->
+	</div>
 
 </body>
 </html>
